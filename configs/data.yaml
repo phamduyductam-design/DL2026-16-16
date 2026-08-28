@@ -1,0 +1,29 @@
+dataset:
+  name: mvtec_ad
+  # Override this path locally or through an environment-specific config.
+  root: data/MVTecAD
+  categories:
+    primary:
+      - wood
+      - metal_nut
+      - capsule
+    optional:
+      - cable
+
+protocol:
+  seed: 42
+  validation_ratio: 0.20
+  train_source: official_train_good_only
+  test_source: official_test_good_and_defective
+  ground_truth_usage: evaluation_only
+
+preprocessing:
+  image_size: 256
+  normalization: imagenet
+  augmentation: light
+
+threshold:
+  source: validation_normal_only
+  image_rule: percentile
+  pixel_rule: percentile
+

@@ -1,0 +1,43 @@
+name: Task
+description: Công việc có đầu ra và Definition of Done rõ ràng
+title: "[P?][W?] "
+body:
+  - type: input
+    id: owner
+    attributes:
+      label: Owner
+      placeholder: Người 1 / Người 2 / ...
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Mục tiêu
+    validations:
+      required: true
+  - type: textarea
+    id: inputs
+    attributes:
+      label: Input và dependency
+    validations:
+      required: true
+  - type: textarea
+    id: outputs
+    attributes:
+      label: Output bàn giao
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Definition of Done
+      placeholder: Liệt kê tiêu chí kiểm tra được
+    validations:
+      required: true
+  - type: checkboxes
+    id: protocol
+    attributes:
+      label: Protocol
+      options:
+        - label: Không dùng test/mask để train, tune hoặc chọn threshold
+          required: true
