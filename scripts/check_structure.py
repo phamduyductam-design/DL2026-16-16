@@ -6,13 +6,16 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_PATHS = [
     ROOT / "README.md",
     ROOT / "CONTRIBUTING.md",
-    ROOT / "configs" / "data.yaml",
+    ROOT / "configs" / "base.yaml",
+    ROOT / "data_protocol" / "README.md",
+    ROOT / "baselines" / "README.md",
+    ROOT / "padim" / "README.md",
+    ROOT / "patchcore" / "README.md",
+    ROOT / "evaluation" / "README.md",
+    ROOT / "deployment" / "README.md",
     ROOT / "docs" / "PROTOCOL.md",
     ROOT / "docs" / "WORKFLOW.md",
-    ROOT / "docs" / "TASKS.md",
-    ROOT / "data" / "README.md",
-    ROOT / "src" / "README.md",
-    ROOT / "outputs" / "README.md",
+    ROOT / "docs" / "TEAM.md",
 ]
 
 
@@ -24,8 +27,8 @@ def main() -> int:
             print(f"- {path}")
         return 1
 
-    forbidden = list((ROOT / "data").glob("MVTecAD/**/*"))
-    if forbidden:
+    forbidden_roots = [ROOT / "data", ROOT / "datasets"]
+    if any(any(path.rglob("*")) for path in forbidden_roots if path.exists()):
         print("Dataset files were found inside the repository. Keep MVTec AD outside Git.")
         return 1
 
@@ -35,4 +38,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

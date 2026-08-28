@@ -18,8 +18,8 @@ Thumbs.db
 !.env.example
 
 # Dataset: never commit MVTec AD images
-data/MVTecAD/
-data/mvtec*/
+data/
+datasets/
 *.tar.xz
 *.zip
 
@@ -34,8 +34,7 @@ mlruns/
 *.pt
 *.onnx
 
-# Generated outputs (keep documentation files only)
-outputs/*
-!outputs/README.md
-!outputs/.gitkeep
-
+# Generated outputs
+outputs/
+results/
+logs/

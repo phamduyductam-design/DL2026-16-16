@@ -1,0 +1,30 @@
+project:
+  name: industrial_surface_anomaly_detection
+  seed: 42
+
+dataset:
+  root: ${MVTEC_ROOT}
+  primary_categories: [wood, metal_nut, capsule]
+  optional_categories: [cable]
+  validation_ratio: 0.20
+  train_source: official_train_good_only
+  ground_truth_usage: evaluation_only
+
+preprocessing:
+  image_size: 256
+  normalization: imagenet
+  augmentation: light
+
+models:
+  baseline: [classical_cv, autoencoder]
+  comparison: padim
+  primary: patchcore
+
+threshold:
+  source: validation_normal_only
+  percentile: 99.0
+
+output:
+  root: outputs
+  save_predictions: true
+  save_anomaly_maps: true

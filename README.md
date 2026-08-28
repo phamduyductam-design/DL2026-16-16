@@ -1,74 +1,66 @@
 # Industrial Surface Anomaly Detection
 
-Đồ án Deep Learning phát hiện bất thường ở cấp ảnh và định vị vùng lỗi ở cấp pixel trên MVTec AD.
+Hệ thống phát hiện bất thường cấp ảnh và định vị vùng lỗi cấp pixel trên MVTec AD.
+Repository được chia thành sáu khu vực chức năng độc lập để sáu thành viên làm song song.
 
-## Phạm vi đã khóa
+## Cấu trúc chính
 
-- Category chính: `wood`, `metal_nut`, `capsule`.
-- Category mở rộng: `cable` nếu đủ thời gian.
-- Mô hình: Classical CV, Convolutional Autoencoder, PaDiM và PatchCore.
-- PatchCore là mô hình chính; PaDiM là đối chứng mạnh; Autoencoder là Deep Learning baseline.
-- Train chỉ dùng ảnh `train/good`; test image và ground-truth mask không được dùng để huấn luyện hay chọn mô hình.
+| Khu vực | Phụ trách | Nội dung |
+|---|---|---|
+| [`data_protocol/`](data_protocol/) | Người 1 - Leader | Dataset, split, transforms, contracts, chống leakage |
+| [`baselines/`](baselines/) | Người 2 | Classical CV và Convolutional Autoencoder |
+| [`padim/`](padim/) | Người 3 | Gaussian feature statistics và Mahalanobis scoring |
+| [`patchcore/`](patchcore/) | Người 4 | Memory bank, coreset và nearest-neighbor scoring |
+| [`evaluation/`](evaluation/) | Người 5 | Metric, threshold, ablation và error analysis |
+| [`deployment/`](deployment/) | Người 6 | Inference adapter, visualization và web demo |
 
-## Bắt đầu nhanh
+Các phần dùng chung nằm ở `.github/`, `configs/`, `docs/`, `scripts/` và `tests/`.
 
-1. Đọc [`docs/PROTOCOL.md`](docs/PROTOCOL.md) trước khi viết code.
-2. Đặt MVTec AD ngoài Git và cấu hình đường dẫn trong `configs/data.yaml`.
-3. Mỗi thành viên tạo branch theo [`CONTRIBUTING.md`](CONTRIBUTING.md).
-4. Làm việc theo [`docs/WORKFLOW.md`](docs/WORKFLOW.md) và backlog trong [`docs/TASKS.md`](docs/TASKS.md).
-5. Chỉ merge khi PR đạt Definition of Done và đã qua cross-review.
-
-## Cấu trúc repository
+## Cây thư mục
 
 ```text
 deep_learning/
-├── .github/                 # CI, issue và pull-request template
-├── configs/                 # Cấu hình dữ liệu/thí nghiệm
-├── data/                    # Chỉ hướng dẫn, không commit dataset
-├── docs/                    # Workflow, protocol và backlog
-├── src/
-│   ├── datasets/            # Người 1
-│   ├── models/              # Người 2, 3, 4
-│   ├── evaluation/          # Người 5
-│   ├── visualization/       # Người 6
-│   └── utils/               # Tiện ích dùng chung
-├── scripts/                 # Entry points train/fit/evaluate
-├── app/                     # Web demo
-├── outputs/                 # Kết quả tái tạo được; file lớn không commit
-└── tests/                   # Sanity/unit tests
+├── .github/                 # CI và template làm việc
+├── baselines/               # Người 2
+├── configs/                 # Cấu hình dùng chung
+├── data_protocol/           # Người 1
+├── deployment/              # Người 6
+├── docs/                    # Protocol, workflow và phân công
+├── evaluation/              # Người 5
+├── padim/                   # Người 3
+├── patchcore/               # Người 4
+├── scripts/                 # Lệnh train/fit/evaluate/demo
+├── tests/                   # Kiểm tra contract và protocol
+├── .env.example
+├── .gitignore
+├── .python-version
+├── CONTRIBUTING.md
+├── Makefile
+├── pyproject.toml
+├── requirements-dev.txt
+└── requirements.txt
 ```
 
-## Interface bàn giao bắt buộc
+## Chạy nhanh
 
-Dataset loader phải trả tối thiểu:
-
-```python
-{
-    "image": image_tensor,
-    "label": 0_or_1,
-    "mask": mask_tensor,
-    "category": category,
-    "defect_type": defect_type,
-    "image_path": image_path,
-}
+```bash
+python -m venv .venv
+source .venv/bin/activate       # Windows: .venv\Scripts\activate
+pip install -r requirements-dev.txt
+make check
 ```
 
-Mỗi model khi inference phải trả tối thiểu:
+Dataset không được commit. Khai báo đường dẫn bằng biến `MVTEC_ROOT` hoặc trong
+`configs/base.yaml`.
 
-```python
-{
-    "image_score": float_score,
-    "anomaly_map": anomaly_map,
-    "metadata": {"model": model_name, "category": category},
-}
-```
+## Protocol đã khóa
 
-## Definition of Done toàn dự án
+- Category chính: `wood`, `metal_nut`, `capsule`; `cable` là mở rộng.
+- Train chỉ dùng official `train/good`.
+- Validation tách 20% từ normal train với seed 42.
+- Official test và ground-truth masks chỉ dùng đánh giá cuối.
+- Threshold lấy từ validation normal, không tối ưu trên test.
+- Tất cả model dùng chung `Sample` và `Prediction` contracts.
 
-- Không có data leakage.
-- Cùng split, transform và metric cho các model so sánh.
-- Có AUROC/AP ở cấp ảnh; Pixel AUROC/AUPRO và Dice/IoU ở cấp pixel.
-- Có ít nhất ba nhóm ablation và error analysis.
-- Lưu seed, config, version thư viện và kết quả CSV/JSON.
-- Demo hiển thị anomaly score, Good/Defect, heatmap, mask và overlay.
-
+Xem [`docs/TEAM.md`](docs/TEAM.md), [`docs/PROTOCOL.md`](docs/PROTOCOL.md) và
+[`docs/WORKFLOW.md`](docs/WORKFLOW.md) trước khi bắt đầu.
