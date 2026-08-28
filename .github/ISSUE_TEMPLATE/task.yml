@@ -1,0 +1,59 @@
+name: Task
+description: Tạo task cho một workstream của đồ án
+title: "[TASK] "
+labels: ["task"]
+body:
+  - type: dropdown
+    id: workstream
+    attributes:
+      label: Workstream
+      options:
+        - "1 - Data & Protocol"
+        - "2 - Baseline Models"
+        - "3 - PaDiM"
+        - "4 - PatchCore"
+        - "5 - Evaluation & Research"
+        - "6 - Deployment, Integration & Report"
+        - "Shared / CI / Documentation"
+    validations:
+      required: true
+
+  - type: textarea
+    id: objective
+    attributes:
+      label: Mục tiêu
+      description: Nêu một kết quả cụ thể mà task phải tạo ra.
+      placeholder: Ví dụ: triển khai deterministic normal validation split cho 3 category.
+    validations:
+      required: true
+
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: Deliverables
+      placeholder: Code, config, test, CSV/JSON, figure hoặc tài liệu cần bàn giao.
+    validations:
+      required: true
+
+  - type: textarea
+    id: definition_of_done
+    attributes:
+      label: Definition of Done
+      placeholder: Các điều kiện kiểm chứng được để đóng task.
+    validations:
+      required: true
+
+  - type: input
+    id: dependency
+    attributes:
+      label: Dependency / blocker
+      placeholder: Issue, config, data API hoặc model output cần có trước.
+
+  - type: input
+    id: reviewer
+    attributes:
+      label: Reviewer
+      placeholder: GitHub username theo cặp cross-review.
+    validations:
+      required: true
+

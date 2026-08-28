@@ -1,0 +1,3 @@
+# Thêm dependency sau khi nhóm khóa framework và phiên bản CUDA/CPU.
+# Khuyến nghị pin phiên bản để experiment tái lập được.
+

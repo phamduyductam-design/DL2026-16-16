@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Secrets and local config
+.env
+*.secret
+*.key
+
+# Dataset: never commit MVTec AD images
+data/*
+!data/README.md
+
+# Model artifacts and experiment outputs
+outputs/*
+!outputs/README.md
+artifacts/
+checkpoints/
+*.ckpt
+*.pth
+*.pt
+*.onnx
+*.pkl
+*.joblib
+*.npy
+*.npz
+
+# Logs and trackers
+logs/
+runs/
+wandb/
+mlruns/
+

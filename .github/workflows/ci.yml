@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main, dev]
+  push:
+    branches: [main, dev]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version-file: .python-version
+
+      - name: Install dependencies when declared
+        if: ${{ hashFiles('requirements.txt') != '' }}
+        run: |
+          python -m pip install --upgrade pip
+          if grep -Eq '^[A-Za-z0-9_.-]+' requirements.txt; then pip install -r requirements.txt; fi
+
+      - name: Compile Python sources
+        run: >-
+          python -m compileall -q
+          data_protocol baseline_models padim_model patchcore_model
+          evaluation_research deployment_report shared scripts tests
+
+      - name: Run tests when present
+        if: ${{ hashFiles('tests/**/*.py') != '' }}
+        run: python -m pytest -q
+
+      - name: Reject accidentally committed large files
+        run: |
+          oversized=$(find . -type f -not -path './.git/*' -size +20M -print)
+          if [ -n "$oversized" ]; then
+            echo "Files larger than 20 MB are not allowed:"
+            echo "$oversized"
+            exit 1
+          fi
+
