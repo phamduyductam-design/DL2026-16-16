@@ -4,11 +4,11 @@ Tạo board với các cột: `Backlog`, `Ready`, `In Progress`, `In Review`, `B
 
 ## Người 1 - Data & Protocol
 
-- [x] Chuẩn hóa cấu trúc MVTec AD và data path.
-- [x] Viết loader cho `wood`, `metal_nut`, `capsule`.
-- [x] Tạo deterministic normal validation split.
-- [x] Khóa preprocessing/augmentation config.
-- [x] Viết test chống data leakage.
+- [ ] Chuẩn hóa cấu trúc MVTec AD và data path.
+- [ ] Viết loader cho `wood`, `metal_nut`, `capsule`.
+- [ ] Tạo deterministic normal validation split.
+- [ ] Khóa preprocessing/augmentation config.
+- [ ] Viết test chống data leakage.
 
 ## Người 2 - Baseline Models
 
@@ -53,3 +53,4 @@ Tạo board với các cột: `Backlog`, `Ready`, `In Progress`, `In Review`, `B
 - [ ] W2 gate: PaDiM + PatchCore chạy trên 3 category.
 - [ ] W3 gate: metric + ablation + error analysis + model selection.
 - [ ] W4 gate: demo + report + rerun + rehearsal.
+
