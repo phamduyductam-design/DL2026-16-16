@@ -20,3 +20,9 @@ Tên file đề xuất:
 
 Ví dụ: `patchcore_wood_resnet18_r256_c01.yaml`.
 
+## Config đã khóa cho tuần 1
+
+`data_protocol_week1.yaml` khóa ba category chính, seed `42`, normal validation
+fraction `0.2`, resize `256 × 256`, ImageNet normalization và deterministic
+horizontal flip cho train. Official test không tham gia bất kỳ lựa chọn nào
+trong config này.

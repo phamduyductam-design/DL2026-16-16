@@ -1,0 +1,21 @@
+{
+  "categories": ["wood", "metal_nut", "capsule"],
+  "seed": 42,
+  "validation_fraction": 0.2,
+  "data_root_env": "MVTEC_AD_ROOT",
+  "transform": {
+    "resolution": [256, 256],
+    "mean": [0.485, 0.456, 0.406],
+    "std": [0.229, 0.224, 0.225],
+    "horizontal_flip_probability": 0.5,
+    "seed": 42
+  },
+  "source": {
+    "provider": "Kaggle",
+    "dataset_handle": "nghiavutrong/dataset-deep-learning-mvtec",
+    "url": "https://www.kaggle.com/datasets/nghiavutrong/dataset-deep-learning-mvtec",
+    "retrieved_on": "2026-08-29",
+    "kaggle_page_license": "Unknown",
+    "scope_downloaded": ["MVTecAD/wood", "MVTecAD/metal_nut", "MVTecAD/capsule"]
+  }
+}

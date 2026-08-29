@@ -1,3 +1,5 @@
-# Thêm dependency sau khi nhóm khóa framework và phiên bản CUDA/CPU.
-# Khuyến nghị pin phiên bản để experiment tái lập được.
-
+# Week-1 data pipeline dependencies. Model owners pin torch/torchvision after
+# the group locks the CUDA/CPU runtime; do not guess a CUDA build here.
+numpy==2.3.5
+Pillow==12.3.0
+pytest==9.1.1
