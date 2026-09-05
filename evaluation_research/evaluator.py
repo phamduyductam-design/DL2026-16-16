@@ -7,6 +7,7 @@ from pathlib import Path
 import numpy as np
 
 from evaluation_research.metrics import (
+    compute_aupro,
     compute_image_metrics,
     compute_pixel_metrics,
 )
@@ -174,7 +175,14 @@ def evaluate_predictions(
         anomaly_maps=stacked_anomaly_maps,
         threshold=pixel_threshold,
     )
-
+    
+    pixel_aupro_30 = compute_aupro(
+    masks=stacked_masks,
+    anomaly_maps=stacked_anomaly_maps,
+    max_fpr=0.30,
+    num_thresholds=200,
+    connectivity=8,
+   )
     inference_array = np.asarray(inference_times, dtype=float)
 
     return {
@@ -186,6 +194,7 @@ def evaluate_predictions(
         "config_path": reference["config_path"],
         **image_metrics,
         **pixel_metrics,
+        "pixel_aupro_30": pixel_aupro_30,
         "threshold_image": float(reference["threshold_image"]),
         "threshold_pixel": pixel_threshold,
         "threshold_source": threshold_source,

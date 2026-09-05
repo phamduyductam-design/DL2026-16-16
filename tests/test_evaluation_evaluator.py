@@ -114,6 +114,7 @@ def test_evaluate_predictions_returns_flat_summary(evaluator_case):
     assert result["pixel_auroc"] == pytest.approx(1.0)
     assert result["pixel_dice"] == pytest.approx(1.0)
     assert result["pixel_iou"] == pytest.approx(1.0)
+    assert result["pixel_aupro_30"] == pytest.approx(1.0)
 
     assert result["threshold_image"] == pytest.approx(0.5)
     assert result["threshold_pixel"] == pytest.approx(0.5)
