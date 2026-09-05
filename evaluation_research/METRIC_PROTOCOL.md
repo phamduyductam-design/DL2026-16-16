@@ -70,16 +70,30 @@ Quy tắc edge case áp dụng cho toàn bộ category:
 
 ### AUPRO@0.30
 
-- Tách defect regions trong ground-truth mask bằng connected components với 8-connectivity.
+Input có thể là một ảnh 2D hoặc một batch ảnh 3D. Connected components phải được tìm riêng trên từng ảnh, không được label trực tiếp cả batch 3D vì có thể nối nhầm regions giữa hai ảnh.
+
+- Tách defect regions trong từng ground-truth mask bằng connected components với 8-connectivity.
 - Với mỗi threshold, tính overlap riêng cho từng defect region.
-- PRO là trung bình overlap của tất cả defect regions có thật.
-- FPR được tính trên tất cả pixels không thuộc defect region trong toàn bộ final-test set, bao gồm background của ảnh defect và toàn bộ pixels của ảnh normal.
-- Dùng một threshold grid xác định trước và ghi lại trong config.
-- Chỉ giữ phần đường cong có `FPR <= 0.30`.
-- Nội suy điểm biên tại `FPR = 0.30` nếu cần.
-- Tích phân đường cong PRO–FPR và chia cho `0.30`.
+- PRO là trung bình không trọng số của recall trên tất cả defect regions có thật. Region nhỏ và region lớn có trọng số bằng nhau.
+- FPR được tính trên tất cả pixels có ground truth bằng 0 trong toàn bộ final-test set, bao gồm background của ảnh defect và toàn bộ pixels của ảnh normal.
+
+Threshold curve được tạo theo quy tắc cố định:
+
+1. Thêm một all-negative anchor với threshold bằng positive infinity.
+2. Tạo đúng `num_thresholds` giá trị hữu hạn bằng `numpy.linspace(global_max_score, global_min_score, num_thresholds)`, theo thứ tự giảm dần.
+3. Một pixel được dự đoán defect khi `score >= threshold`.
+4. Threshold cuối bằng global minimum nên tạo all-positive prediction.
+5. Giữ nguyên thứ tự threshold và không loại các điểm có FPR trùng nhau; các đoạn thẳng đứng là một phần cần thiết của curve.
+
+Cách cắt và tích phân:
+
+- Bắt đầu tại `(FPR=0, PRO=0)` từ all-negative anchor.
+- Giữ các điểm theo thứ tự threshold giảm dần.
+- Khi gặp điểm đầu tiên có `FPR > max_fpr`, nội suy tuyến tính từ điểm ngay trước nó để tạo đúng điểm biên tại `FPR = max_fpr`.
+- Tích phân bằng trapezoidal rule trên đoạn từ `0` đến `max_fpr`.
+- Chia diện tích cho `max_fpr` để kết quả được chuẩn hóa về khoảng `[0, 1]`.
 - Tên trường kết quả là `pixel_aupro_30`.
-- Nếu tập đánh giá không có defect region, trả NaN và cảnh báo rõ.
+- Nếu không có defect region hoặc không có background pixel, trả NaN và phát `RuntimeWarning`.
 
 Cấu hình mặc định:
 
