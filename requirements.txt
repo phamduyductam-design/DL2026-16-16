@@ -1,3 +1,7 @@
-# Thêm dependency sau khi nhóm khóa framework và phiên bản CUDA/CPU.
-# Khuyến nghị pin phiên bản để experiment tái lập được.
-
+# Shared CPU dependencies for data protocol and evaluation on Python 3.11.
+# Deep-learning framework/CUDA versions will be pinned separately by the group.
+numpy==2.3.5
+Pillow==12.3.0
+pytest==9.1.1
+scikit-learn==1.9.0
+scipy==1.17.1
