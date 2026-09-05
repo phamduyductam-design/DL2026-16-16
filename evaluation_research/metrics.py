@@ -1,9 +1,11 @@
 from __future__ import annotations
-from numbers import Integral, Real
+
 import warnings
 from collections.abc import Sequence
-from scipy.ndimage import label as connected_components
+from numbers import Integral, Real
+
 import numpy as np
+from scipy.ndimage import label as connected_components
 from sklearn.metrics import average_precision_score, roc_auc_score
 
 

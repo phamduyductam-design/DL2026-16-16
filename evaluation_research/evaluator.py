@@ -175,14 +175,14 @@ def evaluate_predictions(
         anomaly_maps=stacked_anomaly_maps,
         threshold=pixel_threshold,
     )
-    
+
     pixel_aupro_30 = compute_aupro(
-    masks=stacked_masks,
-    anomaly_maps=stacked_anomaly_maps,
-    max_fpr=0.30,
-    num_thresholds=200,
-    connectivity=8,
-   )
+        masks=stacked_masks,
+        anomaly_maps=stacked_anomaly_maps,
+        max_fpr=0.30,
+        num_thresholds=200,
+        connectivity=8,
+    )
     inference_array = np.asarray(inference_times, dtype=float)
 
     return {
