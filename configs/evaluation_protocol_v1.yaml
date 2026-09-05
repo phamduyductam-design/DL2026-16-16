@@ -1,0 +1,44 @@
+protocol_version: 1
+
+primary_metrics:
+  detection: image_auroc
+  localization: pixel_aupro_30
+
+supporting_metrics:
+  image:
+    - image_ap
+    - image_f1
+  pixel:
+    - pixel_auroc
+    - pixel_dice
+    - pixel_iou
+
+threshold_image:
+  source: normal_validation
+  method: quantile
+  quantile: 0.99
+  quantile_method: higher
+
+threshold_pixel:
+  source: normal_validation
+  method: quantile
+  quantile: 0.995
+  quantile_method: higher
+
+aupro:
+  max_fpr: 0.30
+  num_thresholds: 200
+  connectivity: 8
+
+aggregation:
+  category: macro
+  seed_summary: mean_sample_std
+  single_seed_std: null
+
+result_output:
+  formats:
+    - csv
+    - json
+  overwrite_existing: false
+  non_finite_json_value: null
+  non_finite_csv_value: ""
