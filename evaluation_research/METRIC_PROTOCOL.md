@@ -39,8 +39,7 @@ Tạo predicted label bằng quy tắc:
 
 Sau đó tính F1 với defect là positive class.
 
-Nếu tập đánh giá chỉ chứa một class, evaluator trả NaN và cảnh báo rõ cho metric không xác định, thay vì crash hoặc âm thầm trả kết quả gây hiểu nhầm.
-
+Nếu tập đánh giá không chứa đủ cả normal và defect, cả ba metric `image_auroc`, `image_ap` và `image_f1` đều được xem là không xác định. Evaluator phải trả NaN cho cả ba metric và phát `RuntimeWarning` chứa cụm từ `single class`, thay vì crash hoặc âm thầm trả kết quả gây hiểu nhầm.
 ## 4. Pixel-level metrics
 
 Anomaly map và ground-truth mask phải có cùng kích thước trước khi tính metric.
