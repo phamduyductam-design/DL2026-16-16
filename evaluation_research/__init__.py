@@ -1,5 +1,6 @@
 """Evaluation and research utilities."""
 
+from evaluation_research.evaluator import evaluate_predictions
 from evaluation_research.metrics import (
     compute_image_metrics,
     compute_pixel_metrics,
@@ -17,6 +18,7 @@ __all__ = [
     "REQUIRED_PREDICTION_FIELDS",
     "compute_image_metrics",
     "compute_pixel_metrics",
+    "evaluate_predictions",
     "fit_normal_threshold",
     "fit_thresholds_from_normal_validation",
     "validate_prediction",
