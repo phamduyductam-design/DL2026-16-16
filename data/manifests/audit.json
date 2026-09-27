@@ -1,0 +1,154 @@
+{
+  "counts": {
+    "imagenette_train": 6000,
+    "imagenette_val": 300,
+    "imagenette_test": 1000,
+    "pets_test": 500
+  },
+  "class_counts": {
+    "imagenette_train": {
+      "n01440764": 600,
+      "n02102040": 600,
+      "n02979186": 600,
+      "n03000684": 600,
+      "n03028079": 600,
+      "n03394916": 600,
+      "n03417042": 600,
+      "n03425413": 600,
+      "n03445777": 600,
+      "n03888257": 600
+    },
+    "imagenette_val": {
+      "n01440764": 30,
+      "n02102040": 30,
+      "n02979186": 30,
+      "n03000684": 30,
+      "n03028079": 30,
+      "n03394916": 30,
+      "n03417042": 30,
+      "n03425413": 30,
+      "n03445777": 30,
+      "n03888257": 30
+    },
+    "imagenette_test": {
+      "n01440764": 100,
+      "n02102040": 100,
+      "n02979186": 100,
+      "n03000684": 100,
+      "n03028079": 100,
+      "n03394916": 100,
+      "n03417042": 100,
+      "n03425413": 100,
+      "n03445777": 100,
+      "n03888257": 100
+    },
+    "pets_test": {
+      "31": 14,
+      "24": 14,
+      "28": 14,
+      "4": 13,
+      "13": 14,
+      "1": 14,
+      "32": 14,
+      "19": 14,
+      "9": 13,
+      "23": 13,
+      "2": 14,
+      "29": 13,
+      "8": 14,
+      "20": 13,
+      "26": 13,
+      "5": 14,
+      "12": 13,
+      "22": 14,
+      "16": 14,
+      "37": 13,
+      "33": 13,
+      "30": 13,
+      "18": 13,
+      "27": 13,
+      "17": 13,
+      "15": 13,
+      "6": 13,
+      "10": 13,
+      "21": 13,
+      "14": 14,
+      "25": 14,
+      "36": 14,
+      "35": 14,
+      "7": 14,
+      "34": 13,
+      "3": 14,
+      "11": 14
+    }
+  },
+  "invalid": [
+    {
+      "path": "american_pit_bull_terrier_31.jpg",
+      "error": "image file is truncated (14 bytes not processed)"
+    }
+  ],
+  "duplicates": [
+    "Bombay_189.jpg",
+    "newfoundland_155.jpg"
+  ],
+  "config": {
+    "imagenette": {
+      "root": "datasets/imagenette2-160.tgz"
+    },
+    "pets": {
+      "root": "datasets/Oxford-IIIT-Pet"
+    },
+    "split_seed": 2026,
+    "manifest_dir": "data/manifests"
+  },
+  "protocol": "v2-train-val-from-official-train-balanced-pets",
+  "near_duplicates": [
+    {
+      "image_id": "be1d4bac325a47b6168cc7ac5e35a16b12424569a8661fe1faf06a9393585b9c",
+      "duplicate_of": "27d28654ec61902f13fe6cf44dc21642808b80267a566965879cc0b46d76b00d",
+      "phash_distance": 0,
+      "thumbnail_MAE": 0.0020973754581063986,
+      "thumbnail_MSE": 1.1058446943934541e-05,
+      "path": "Egyptian_Mau_3.jpg"
+    },
+    {
+      "image_id": "988d4eb3fd0174d10c9e85a2987801989893416239dabcc84165dbb182d43619",
+      "duplicate_of": "379886036f9c0b4f6baec8c5cba001d7ca327117f3f969a0799ad189863641c7",
+      "phash_distance": 0,
+      "thumbnail_MAE": 0.00014552695211023092,
+      "thumbnail_MSE": 5.706939418814727e-07,
+      "path": "japanese_chin_78.jpg"
+    },
+    {
+      "image_id": "091793953743fdcc1b1890524b696e063ae2c557bc9d499d70027ec532c87a9d",
+      "duplicate_of": "b4c2feea22295eeee5412313ee8b2188eb905901530fe7cd35fc60870b26732d",
+      "phash_distance": 0,
+      "thumbnail_MAE": 0.0002068014582619071,
+      "thumbnail_MSE": 8.310105386044597e-07,
+      "path": "japanese_chin_81.jpg"
+    },
+    {
+      "image_id": "cf3ff289a288d88891d9fc724a88eba44e1a904f8e4b979ed970a3f61b3e7023",
+      "duplicate_of": "9bb1bde4586c27606212be4421e48ce66f084c838cbdf8d7d1db07fc359f9ef7",
+      "phash_distance": 0,
+      "thumbnail_MAE": 0.00022850286040920764,
+      "thumbnail_MSE": 1.7371122567055863e-06,
+      "path": "leonberger_2.jpg"
+    }
+  ],
+  "near_duplicate_policy": {
+    "phash_hamming_max": 4,
+    "thumbnail_size": 32,
+    "RGB_MAE_max": 0.04,
+    "RGB_MSE_max": 0.003,
+    "scope": "all scanned sources; deterministic deduplication",
+    "limitation": "Approximate screening; not proof that all semantic near-duplicates are absent"
+  },
+  "manifest_sha256": {
+    "imagenette_train": "c8af6fc2b55c3520ffbc2dd695ce453172acfeddc360462938c7414190be3599",
+    "imagenette_val": "fbbd9abebe3dd050a025e63c3e731c0509b2a3e70b98ffbb44e76ea3aa56f934",
+    "imagenette_test": "2e2e7316b67e5aab59c7c58431712e2b5eb9f49ea91e59d420598a31c5b89b4e",
+    "pets_test": "830f3f06a8e9805706790bba776ceffe44f34a8273136a33487f08a82e9db32b"
+  }
+}

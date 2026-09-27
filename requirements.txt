@@ -1,3 +1,10 @@
-# Thêm dependency sau khi nhóm khóa framework và phiên bản CUDA/CPU.
-# Khuyến nghị pin phiên bản để experiment tái lập được.
-
+torch>=2.2,<3
+numpy>=1.26
+Pillow>=10
+PyYAML>=6
+scipy>=1.11
+scikit-image>=0.22
+matplotlib>=3.8
+pandas>=2.2
+pytest>=8
+gradio>=5,<7

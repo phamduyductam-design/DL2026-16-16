@@ -1,0 +1,7 @@
+# Set these paths to your existing datasets before running.
+imagenette:
+  root: datasets/imagenette2-160.tgz
+pets:
+  root: datasets/Oxford-IIIT-Pet
+split_seed: 2026
+manifest_dir: data/manifests

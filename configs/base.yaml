@@ -1,0 +1,12 @@
+dataset_config: configs/datasets.yaml
+image_size: 128
+batch_size: 32
+epochs: 30
+lr: 0.001
+early_stopping_patience: 5
+mask_seed: 314159
+train_seed: 42
+num_workers: 0
+device: auto
+output_dir: outputs
+mask_bank_dir: data/mask_bank
