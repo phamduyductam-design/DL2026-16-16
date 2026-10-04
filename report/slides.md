@@ -1,16 +1,30 @@
-# Presentation material (12 slides)
+# Four-slide project overview (maximum three minutes)
 
-1. **Topic** — Deep Image Inpainting; show GT → mask → restored.
-2. **Research questions** — pattern, size, position, AE vs U-Net, Pet generalization.
-3. **Datasets** — V2 Imagenette 6000/300 from disjoint official train selections, 1000 from official val; Pet 500 official test, 13–14 per breed; SHA256 and approximate near-duplicate screening.
-4. **12 conditions** — C/R/F/H × 15/30/50%; fixed banks, paired rectangles, maximum between-pattern area spread ≤0.98 percentage points per image/ratio.
-5. **Autoencoder** — 4-channel input, encoder 32/64/128, bottleneck 256@16, decoder 128/64/32, no skips, sigmoid.
-6. **Small U-Net** — same encoder with skips at 128, 64, 32; bilinear upsampling.
-7. **Loss/training/metrics** — per-image hole MAE + 0.1 valid MAE; Adam, validation-only selection; six metrics including inference time.
-8. **Model comparison** — To be measured. Use real E1 charts and results.md; include parameter count and timing setup.
-9. **Mask size/pattern/position** — To be measured. Use E2–E4 charts with held-constant factors and paired C/R.
-10. **Pet generalization/failures** — To be measured. Use E6 chart and ranked failure grids; no Pet fine-tuning or unproven claims.
-11. **Gradio demo** — uploaded reference image, synthetic fixed mask, switch AE/U-Net; PSNR/SSIM measure reference similarity, not confidence or proof for already damaged images.
-12. **Conclusion/limitations** — Pending experiment. Answer questions from real data; discuss 128px images, model capacity, single-seed limits.
+## Slide 1 — Problem and research question
 
-Speaker note: slides 8–10 must reference outputs/metrics/summary.csv and generated figures. Never substitute example numbers for measured results.
+- Reconstruct missing RGB regions from visible image context.
+- Ask how mask size, mask shape, and mask position change reconstruction quality, and whether a small U-Net improves on a convolutional autoencoder.
+- Show one reference image, its masked input, and both reconstructions.
+
+## Slide 2 — Method and experiments
+
+- Train both models from scratch on the same Imagenette selection: 6,000 training and 300 validation images.
+- Evaluate on 1,000 Imagenette test images and 500 Oxford-IIIT Pet official-test images; Pet is never used for training or checkpoint selection.
+- Compare 12 paired conditions: four mask patterns at 15%, 30%, and 50% target missing area. Select the best saved model using Imagenette validation MAE-hole.
+- Report missing-region error, PSNR, whole-image SSIM, and model-only inference throughput.
+
+## Slide 3 — Key results
+
+- Mean Imagenette MAE-hole: autoencoder 0.1078, small U-Net 0.1031.
+- Mean Pet MAE-hole: autoencoder 0.1036, small U-Net 0.0993.
+- Missing-region error increases as the hidden area grows. Center rectangles are slightly harder than paired random rectangles in this experiment.
+- Show the model-comparison figure and one size or pattern figure from outputs/figures/. State clearly that this is one training seed.
+
+## Slide 4 — Conclusion and demo
+
+- The small U-Net reduces mean missing-region error in both test sets, with a modestly slower measured model-only throughput.
+- The selected Pet test set does not show worse mean error than Imagenette, so avoid claiming a universal domain-transfer failure.
+- Demonstrate a single uploaded reference image with one fixed synthetic mask and switch between the two models.
+- Note the limits: 128 x 128 images, compact models, one seed, and metrics measured against a known reference rather than confidence.
+
+Use report/results.md and outputs/metrics/summary.csv for exact values. Keep the spoken overview under three minutes; examination questions follow separately.

@@ -1,0 +1,35 @@
+# Local environments and downloaded source data
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+.DS_Store
+/datasets/
+/data/mask_bank/
+
+# Keep only the curated, reproducible result artifacts.
+/outputs/*
+!/outputs/checkpoints/
+!/outputs/metrics/
+!/outputs/logs/
+!/outputs/figures/
+/outputs/checkpoints/*
+!/outputs/checkpoints/autoencoder_seed42_best.pt
+!/outputs/checkpoints/unet_seed42_best.pt
+/outputs/metrics/*
+!/outputs/metrics/summary.csv
+!/outputs/metrics/per_image.csv
+/outputs/logs/*
+!/outputs/logs/autoencoder_seed42.csv
+!/outputs/logs/autoencoder_seed42.json
+!/outputs/logs/unet_seed42.csv
+!/outputs/logs/unet_seed42.json
+/outputs/figures/*
+!/outputs/figures/mask_examples.png
+!/outputs/figures/mask_area_histogram.png
+!/outputs/figures/imagenette_model_MAE_hole.png
+!/outputs/figures/pets_model_MAE_hole.png
+!/outputs/figures/imagenette_size_MAE_hole.png
+!/outputs/figures/imagenette_pattern.png
+!/outputs/figures/imagenette_position.png
+!/outputs/figures/unet_domain_comparison.png

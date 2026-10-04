@@ -1,0 +1,58 @@
+{
+  "run_id": "unet_seed42",
+  "model": "unet",
+  "train_dataset": "imagenette",
+  "train_seed": 42,
+  "config": {
+    "dataset_config": "configs/datasets.yaml",
+    "image_size": 128,
+    "batch_size": 32,
+    "epochs": 30,
+    "lr": 0.001,
+    "early_stopping_patience": 5,
+    "mask_seed": 314159,
+    "train_seed": 42,
+    "num_workers": 0,
+    "device": "auto",
+    "output_dir": "outputs",
+    "mask_bank_dir": "data/mask_bank",
+    "model": "unet"
+  },
+  "git_commit": "6a5a612b64813bee96bb9e9ed48f53f15fd13595",
+  "parameter_count": 2140995,
+  "device": "cuda",
+  "GPU": "NVIDIA GeForce RTX 4060 Ti",
+  "torch_version": "2.14.1+cu126",
+  "data_identity": {
+    "manifests": {
+      "imagenette_train": "c8af6fc2b55c3520ffbc2dd695ce453172acfeddc360462938c7414190be3599",
+      "imagenette_val": "fbbd9abebe3dd050a025e63c3e731c0509b2a3e70b98ffbb44e76ea3aa56f934",
+      "imagenette_test": "2e2e7316b67e5aab59c7c58431712e2b5eb9f49ea91e59d420598a31c5b89b4e",
+      "pets_test": "830f3f06a8e9805706790bba776ceffe44f34a8273136a33487f08a82e9db32b"
+    },
+    "banks": {
+      "imagenette_val": {
+        "manifest_sha256": "fbbd9abebe3dd050a025e63c3e731c0509b2a3e70b98ffbb44e76ea3aa56f934",
+        "bank_sha256": "f93adb49d35840089195993bfd8a0087c2ca655ad416eb822f1517024688bbfb",
+        "generator_version": "2.0.0",
+        "mask_seed": 314159,
+        "n_pairs": 3600
+      },
+      "imagenette_test": {
+        "manifest_sha256": "2e2e7316b67e5aab59c7c58431712e2b5eb9f49ea91e59d420598a31c5b89b4e",
+        "bank_sha256": "f6aa05f46501babd0108b660fe5e3a8a5c8476d8aa2d6d7dd4bd649e4e29605a",
+        "generator_version": "2.0.0",
+        "mask_seed": 314159,
+        "n_pairs": 12000
+      },
+      "pets_test": {
+        "manifest_sha256": "830f3f06a8e9805706790bba776ceffe44f34a8273136a33487f08a82e9db32b",
+        "bank_sha256": "c5910be025ccbbcb9415a8473ffacc3786838a2d7eb4c1971f504213e2705bb9",
+        "generator_version": "2.0.0",
+        "mask_seed": 314159,
+        "n_pairs": 6000
+      }
+    },
+    "audit_sha256": "ffb2db6540e0a87943018ed24a64fa8d231aa374d7c1ecc7bbed4346fd165fad"
+  }
+}

@@ -32,9 +32,10 @@ def create_app(checkpoint_dir='outputs/checkpoints',seed=42):
         return restored[0].numpy().transpose(1,2,0),text
     with gr.Blocks(title='Deep Image Inpainting') as app:
         gr.Markdown('# Deep Image Inpainting\nGenerate one fixed mask, then compare both models.')
-        gr.Markdown('Ảnh upload được coi là ảnh gốc rồi che nhân tạo. MAE/PSNR/SSIM đo độ giống '
-                    'ảnh gốc này, **không phải confidence**. Demo không xác nhận chất lượng phục hồi '
-                    'ảnh đã hỏng sẵn khi không có ground truth. Đổi model giữ nguyên ảnh và mask đã tạo.')
+        gr.Markdown('The uploaded image is treated as the reference and is then masked synthetically. '
+                    'MAE, PSNR, and SSIM measure similarity to that reference; they are **not confidence scores**. '
+                    'The demo cannot verify recovery of an already damaged image without its original. '
+                    'Switching models keeps the same uploaded image and generated mask.')
         state=gr.State(None)
         upload=gr.Image(type='pil',label='Upload image')
         with gr.Row():
