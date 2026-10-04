@@ -170,18 +170,6 @@ def report_tables(output='outputs'):
     for r in summary.itertuples():
         lines.append(f'| {r.eval_dataset} | {r.model} | {r.condition} | {r.MAE_hole:.5f} | {r.PSNR_hole:.3f} | {r.SSIM_full:.4f} | {r.inference_ms:.3f} |')
     project_path('report/results.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
-    # Keep presentation prose tied to measured values, separately for each domain.
-    slides=project_path('report/slides.md').read_text(encoding='utf-8')
-    slides=slides.replace('To be measured.', 'Measured figures and tables: see report/results.md.')
-    slides=slides.replace('Pending experiment.', 'Use the measured condition-wise results in report/results.md.')
-    measured=['','## Measured model comparison (equal weight over 12 conditions, separately by dataset)','',
-              '| Dataset | Model | MAE-hole | PSNR-hole | SSIM-full | Parameters | ms/image |',
-              '|---|---|---:|---:|---:|---:|---:|']
-    for (dataset,model),rows in summary.groupby(['eval_dataset','model']):
-        measured.append(f'| {dataset} | {model} | {rows.MAE_hole.mean():.5f} | {rows.PSNR_hole.mean():.3f} | {rows.SSIM_full.mean():.4f} | {int(rows.parameter_count.iloc[0])} | {rows.inference_ms.mean():.3f} |')
-    # Idempotent regeneration rather than appending duplicate tables.
-    slides=slides.split('\n## Measured model comparison')[0]
-    project_path('report/slides.md').write_text(slides+'\n'.join(measured)+'\n',encoding='utf-8')
     outline=project_path('report/outline.md').read_text(encoding='utf-8')
     outline=outline.replace('Pending experiment.', 'Measured outputs available: see [results.md](results.md) and outputs/figures/.')
     project_path('report/outline.md').write_text(outline,encoding='utf-8')
